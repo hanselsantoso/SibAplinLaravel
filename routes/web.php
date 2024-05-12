@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +19,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/barang', [BarangController::class, 'index']);
-Route::post('/barang/insert', [BarangController::class, 'insert']);
-Route::post('/barang/update', [BarangController::class, 'update']);
-Route::post('/barang/delete', [BarangController::class, 'delete']);
+
+
+Route::prefix('barang')->group(function () {
+    Route::get('/', [BarangController::class, 'index']);
+    Route::post('/insert', [BarangController::class, 'insert']);
+    Route::post('/update', [BarangController::class, 'update']);
+    Route::post('/delete', [BarangController::class, 'delete']);
+});
+
+Route::prefix('supplier')->group(function () {
+    Route::get('/', [SupplierController::class, 'index']);
+    Route::post('/insert', [SupplierController::class, 'insert']);
+    Route::post('/update', [SupplierController::class, 'update']);
+    Route::post('/delete', [SupplierController::class, 'delete']);
+});

@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 
 class BarangController extends Controller
 {
     function index() {
-        // $barang = Barang::all();
+        $supplier = Supplier::all();
         $barang = Barang::where('status_barang',1)->get();
 
         return view("list",[
-            'barang' => $barang
+            'barang' => $barang,
+            'supplier' => $supplier,
         ]);
     }
 
@@ -20,6 +22,7 @@ class BarangController extends Controller
 
         $data = new Barang;
         $data->nama_barang = $request->nama;
+        $data->id_supplier = $request->supplier;
         $data->harga_barang = $request->harga;
         $data->stok_barang = $request->stok;
  
